@@ -23,7 +23,7 @@ load_dotenv()
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
 app = Flask(__name__)
-app.secret_key = "your_secret_key"  # Replace with your actual secret key
+app.secret_key = os.getenv('SECRET_KEY', 'fallback-key-for-development') # Replace with your actual secret key
 
 # Initialize Markdown
 Markdown(app)
@@ -347,6 +347,6 @@ def download_paper(filename):
     papers_dir = os.path.join(app.root_path, "papers")
     return send_from_directory(papers_dir, filename, as_attachment=True)
 
-
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=False)
