@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Results - AI-Powered Research Summaries</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Left Sidebar Navigation -->
+        <div class="sidebar left-sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-brain"></i> ResearchAI</h2>
+                <button id="sidebar-toggle" class="sidebar-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="/"><i class="fas fa-home"></i> <span>Home</span></a></li>
+                    <li class="active"><a href="#"><i class="fas fa-history"></i> <span>Papers</span></a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content with-right-sidebar">
+            <!-- Results Header -->
+            <section class="results-header">
+                <div class="container">
+                    <h1>Research Results for "{{ session.get('topic', '') }}"</h1>
+                    <a href="/" class="back-button"><i class="fas fa-arrow-left"></i> New Search</a>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section" id="results-section">
+                <div class="results-container">
+                    <h2>Search Results</h2>
+                    <div class="results-grid" id="results-grid">
+                        {% if papers %}
+                            {% for paper_id, paper in papers.items() %}
+                                <div class="result-card">
+                                    <div class="card-header">
+                                        <h3 class="paper-title">{{ paper.title }}</h3>
+                                        <p class="paper-authors">{{ paper.authors }}</p>
+                                        <p class="paper-date">{{ paper.published }}</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="summary-content">
+                                            {{ generate_summary(paper.summary) }}
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="card-actions">
+                                            <button class="action-button save-button" title="Save"><i class="fas fa-bookmark"></i></button>
+                                            <button class="action-button download-button" title="Download"><i class="fas fa-download"></i></button>
+                                            <button class="action-button share-button" title="Share"><i class="fas fa-share-alt"></i></button>
+                                            <a href="{{ paper.url }}" class="view-original" target="_blank">View Original Paper</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="no-results">
+                                <p>No results found. Please try a different search term.</p>
+                                <a href="/" class="cta-button">Try Again</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Footer Section -->
+            <footer class="footer-section">
+                <div class="footer-container">
+                    <div class="footer-content">
+                        <div class="footer-column">
+                            <h3>Quick Links</h3>
+                            <ul>
+                                <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
+                                <li><a href="{{ url_for('kit_papers') }}"><i class="fas fa-bolt"></i> KIT Papers</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-column">
+                            <h3>Contact</h3>
+                            <ul>
+                                <li><a href="mailto:researchainfo@gmail.com"><i class="fas fa-envelope"></i> manishyadav62995@gmail.com</a></li>
+                                <li><a href="tel:+1234567890"><i class="fas fa-phone"></i> +91 6299515059</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="footer-bottom">
+                        <p>&copy; 2025 ResearchAI. All rights reserved.</p>
+                    </div>
+                </div>
+            </footer>
+        </main>
+
+        <!-- Right Sidebar for Chat -->
+        <div class="sidebar right-sidebar" id="chat-sidebar">
+            <div class="sidebar-header chat-header">
+                <h2><i class="fas fa-comments"></i> Research Assistant</h2>
+            </div>
+            <div class="chat-section">
+                <div class="chat-container">
+                    <h3>Ask Questions About These Papers</h3>
+                    <div class="chat-messages" id="chat-messages">
+                        {% if session.get('chat_history') %}
+                            {% for message in session.get('chat_history') %}
+                                <div class="chat-message {{ 'user-message' if message.role == 'user' else 'assistant-message' }}">
+                                    <div class="message-content">
+                                        {% if message.role == 'assistant' %}
+                                            {{ message.content | markdown | safe }}
+                                        {% else %}
+                                            {{ message.content }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="chat-welcome">
+                                <p>Hello! I can help answer questions about these research papers. What would you like to know?</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <form id="chat-form" action="/chat" method="post">
+                        <div class="chat-input-container">
+                            <input type="text" id="chat-input" name="message" placeholder="Ask a question..." autocomplete="off">
+                            <button type="submit" class="chat-button">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

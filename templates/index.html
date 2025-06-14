@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>AI-Powered Research Summaries</title>
+        <link rel="stylesheet"
+            href="{{ url_for('static', filename='css/style.css') }}">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet">
+    </head>
+    <body>
+        <div class="app-container">
+            <!-- Sidebar Navigation -->
+            <div class="sidebar left-sidebar" id="sidebar">
+                <div class="sidebar-header">
+                    <h2><i class="fas fa-brain"></i> ResearchAI</h2>
+                    <button id="sidebar-toggle" class="sidebar-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+                <nav class="sidebar-nav">
+                    <ul>
+                        <li class="active"><a href="#"><i
+                                    class="fas fa-home"></i>
+                                <span>Home</span></a></li>
+                        <li><a
+                                href="https://ai-chatbot-agents-manish.streamlit.app/"><i
+                                    class="fas fa-robot"></i>
+                                <span>Agents</span></a></li>
+                        <li><a href="{{ url_for('kit_papers') }}"><i
+                                    class="fas fa-book"></i> <span>KIT
+                                    Papers</span></a></li>
+                        <!--<li><a href="#"><i class="fas fa-bookmark"></i> <span>Saved</span></a></li>
+                    <li><a href="#"><i class="fas fa-cog"></i> <span>Settings</span></a></li>
+                    <li><a href="#"><i class="fas fa-question-circle"></i> <span>Help</span></a></li> -->
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Hero Section -->
+                <section class="hero">
+                    <div class="hero-content">
+                        <h1>AI-Powered Research Summaries</h1>
+                        <p>Get concise summaries of academic papers in
+                            seconds</p>
+                        <a href="#search-section" class="cta-button">Summarize
+                            Now</a>
+                    </div>
+                </section>
+
+                <!-- Search Section -->
+                <section class="search-section" id="search-section">
+                    <div class="search-container">
+                        <h2>Find Research Papers</h2>
+                        <form id="search-form" action="/" method="post">
+                            <div class="search-input-container">
+                                <input type="text" id="search-input"
+                                    name="topic"
+                                    placeholder="Enter research topic or keywords..."
+                                    autocomplete="off">
+                                <button type="submit" class="search-button">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                            <div id="autocomplete-results"
+                                class="autocomplete-results"></div>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Features Section -->
+                <section class="features-section">
+                    <div class="features-container">
+                        <h2>Why Use ResearchAI?</h2>
+                        <div class="features-grid">
+                            <div class="feature-card">
+                                <div class="feature-icon"><i
+                                        class="fas fa-bolt"></i></div>
+                                <h3>Save Time</h3>
+                                <p>Get summaries of complex research papers in
+                                    seconds instead of hours.</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon"><i
+                                        class="fas fa-brain"></i></div>
+                                <h3>AI-Powered</h3>
+                                <p>Advanced AI understands and summarizes
+                                    technical content accurately.</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon"><i
+                                        class="fas fa-comments"></i></div>
+                                <h3>Interactive Chat</h3>
+                                <p>Ask questions about the papers and get
+                                    intelligent responses.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Footer Section -->
+                <footer class="footer-section">
+                    <div class="footer-container">
+                        <div class="footer-content">
+                            <div class="footer-column">
+                                <h3>Quick Links</h3>
+                                <ul>
+                                    <li><a href="/"><i class="fas fa-home"></i>
+                                            Home</a></li>
+                                    <li><a href="{{ url_for('kit_papers') }}"><i
+                                                class="fas fa-bolt"></i> KIT
+                                            Papers</a></li>
+                                </ul>
+                            </div>
+                            <div class="footer-column">
+                                <h3>Contact</h3>
+                                <ul>
+                                    <li><a href="mailto:info@researchai.com"><i
+                                                class="fas fa-envelope"></i>
+                                            manishyadav62995@gmail.com</a></li>
+                                    <li><a href="tel:+1234567890"><i
+                                                class="fas fa-phone"></i> +91
+                                            6299515059</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="footer-bottom">
+                            <p>&copy; 2025 ResearchAI. All rights reserved.</p>
+                        </div>
+                    </div>
+                </footer>
+            </main>
+        </div>
+
+        <!-- Result Card Template (Hidden) -->
+        <template id="result-card-template">
+            <div class="result-card">
+                <div class="card-header">
+                    <h3 class="paper-title"></h3>
+                    <p class="paper-authors"></p>
+                    <p class="paper-date"></p>
+                </div>
+                <div class="card-body">
+                    <div class="summary-content"></div>
+                </div>
+                <div class="card-footer">
+                    <div class="card-actions">
+                        <button class="action-button save-button"
+                            title="Save"><i
+                                class="fas fa-bookmark"></i></button>
+                        <button class="action-button download-button"
+                            title="Download"><i
+                                class="fas fa-download"></i></button>
+                        <button class="action-button share-button"
+                            title="Share"><i
+                                class="fas fa-share-alt"></i></button>
+                        <a href="#" class="view-original" target="_blank">View
+                            Original Paper</a>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    </body>
+</html>

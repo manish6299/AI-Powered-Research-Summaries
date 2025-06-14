@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KIT Papers - AI-Powered Research Summaries</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Left Sidebar Navigation -->
+        <div class="sidebar left-sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-brain"></i> ResearchAI</h2>
+                <button id="sidebar-toggle" class="sidebar-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="/"><i class="fas fa-home"></i> <span>Home</span></a></li>
+                    <li class="active"><a href="/kit-papers"><i class="fas fa-bolt"></i> <span>KIT Papers</span></a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Results Header -->
+            <section class="results-header">
+                <div class="container">
+                    <h1>KIT Research Papers</h1>
+                    <a href="/" class="back-button"><i class="fas fa-arrow-left"></i> Back to Home</a>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section" id="results-section">
+                <div class="results-container">
+                    <h2>Available Papers</h2>
+                    <div class="results-grid" id="results-grid">
+                        {% if papers %}
+                            {% for paper in papers %}
+                                <div class="result-card">
+                                    <div class="card-header">
+                                        <h3 class="paper-title">{{ paper.title }}</h3>
+                                        <p class="paper-date">{{ paper.date }}</p>
+                                    </div>
+                                    {% if paper.summary %}
+                                    <div class="card-body">
+                                        <div class="summary-content">
+                                            {{ paper.summary }}
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    <div class="card-footer">
+                                        <div class="card-actions">
+                                            <a href="{{ url_for('view_paper', filename=paper.filename) }}" class="view-original" target="_blank">View Paper</a>
+                                            <a href="{{ url_for('download_paper', filename=paper.filename) }}" class="view-original">Download Paper</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="no-results">
+                                <p>No papers available in the KIT collection.</p>
+                                <a href="/" class="cta-button">Back to Home</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Footer Section -->
+            <footer class="footer-section">
+                <div class="footer-container">
+                    <div class="footer-content">
+                        <div class="footer-column">
+                            <h3>Quick Links</h3>
+                            <ul>
+                                <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
+                                <li><a href="{{ url_for('kit_papers') }}"><i class="fas fa-bolt"></i> KIT Papers</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-column">
+                            <h3>Contact</h3>
+                            <ul>
+                                <li><a href="mailto:info@researchai.com"><i class="fas fa-envelope"></i> manishyadav62995@gmail.com</a></li>
+                                <li><a href="tel:+1234567890"><i class="fas fa-phone"></i> +91 6299515059</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="footer-bottom">
+                        <p>&copy; 2025 ResearchAI. All rights reserved.</p>
+                    </div>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html> 

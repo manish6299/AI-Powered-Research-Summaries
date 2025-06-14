@@ -1,0 +1,8 @@
+flask==2.3.3
+python-dotenv==1.0.0
+requests==2.31.0
+arxiv==1.4.8
+flask-limiter==3.5.0
+google-generativeai==0.3.1
+flask-markdown==0.3
+markdown==3.5.1

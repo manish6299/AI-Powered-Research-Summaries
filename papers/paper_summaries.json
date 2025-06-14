@@ -1,0 +1,29 @@
+{
+    "papers": [
+        {
+            "path" : "papers/NLP.pdf",
+            "title" : "NLP for NLP",
+            "summary" : "This paper proposes using Natural Language Processing to enable programming through natural language rather than formal languages. The authors focus on converting English descriptions into procedural programming structures like steps and loops. Their system maps linguistic constructs to program skeletons, potentially making programming more accessible to non-experts, particularly beginners. "
+        },
+        {
+            "path" : "papers/deeplearning.pdf",
+            "title" : "Deep Learning",
+            "summary" : "This paper proposes using Natural Language Processing to enable programming through natural language instead of formal programming languages. The authors challenge the assumption that specialized programming languages are necessary, arguing that NLP techniques can make programming more accessible to non-experts. The paper focuses specifically on handling procedural programming elements like steps and loops by mapping linguistic constructs onto program structures (called 'programmatic semantics'). "
+        },
+        {
+            "path" : "papers/generative ai_02.pdf",
+            "title" : "Generative AI 2",
+            "summary" : "This paper proposes using Natural Language Processing to enable programming through natural language instead of formal programming languages. The authors challenge the assumption that specialized programming languages are necessary, arguing that NLP techniques can make programming more accessible to non-experts. The paper focuses specifically on handling procedural programming elements like steps and loops by mapping linguistic constructs onto program structures (called 'programmatic semantics'). "
+        },
+        {
+            "path" : "papers/generative ai.pdf",
+            "title" : "Generative AI",
+            "summary" : "This paper proposes using Natural Language Processing to enable programming through natural language instead of formal programming languages. The authors challenge the assumption that specialized programming languages are necessary, arguing that NLP techniques can make programming more accessible to non-experts. The paper focuses specifically on handling procedural programming elements like steps and loops by mapping linguistic constructs onto program structures (called 'programmatic semantics'). "
+        },
+        {
+            "path" : "papers/image_processing.pdf",
+            "title" : "Image Processing",
+            "summary" : "This paper proposes using Natural Language Processing to enable programming through natural language instead of formal programming languages. The authors challenge the assumption that specialized programming languages are necessary, arguing that NLP techniques can make programming more accessible to non-experts. The paper focuses specifically on handling procedural programming elements like steps and loops by mapping linguistic constructs onto program structures (called 'programmatic semantics'). "
+        }
+    ]
+}
